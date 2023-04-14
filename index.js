@@ -9,22 +9,23 @@ function getComputerChoice() {
 
 function rockPaperScissorsRound(userInput = "") {
     let computerChoice = getComputerChoice();
-    if(typeof userInput !== "string"){ return "That input is not a string. Please choose either 'Rock', 'Paper' or 'Scissors'."; }
+    if(typeof userInput !== "string"){ console.log("That input is not a string. Please input 'Rock', 'Paper' or 'Scissors'."); return false; }
     userInput = userInput.toLowerCase()
     
-    if(userInput === computerChoice){ return `It's a draw! You both selected ${userInput}!`; }
+    if(userInput === computerChoice){ console.log(`It's a draw! You both selected ${userInput}!`); return false; }
     if(
         (userInput === 'rock' && computerChoice === 'scissors') ||
         (userInput === 'paper' && computerChoice === 'rock') ||
         (userInput === 'scissors' && computerChoice === 'paper')
-    ){ return `You won! Your ${userInput} beat the computer's ${computerChoice}!`; }
+    ){ console.log(`You won! Your ${userInput} beat the computer's ${computerChoice}!`); return true; }
     if(
         (userInput === 'rock' && computerChoice === 'paper') ||
         (userInput === 'paper' && computerChoice === 'scissors') ||
         (userInput === 'scissors' && computerChoice === 'rock')
-    ){ return `You lost... Your ${userInput} was beaten by the computer's ${computerChoice}.`; }
+    ){ console.log(`You lost... Your ${userInput} was beaten by the computer's ${computerChoice}.`); return false; }
     
-    return "That selection is invalid. Please choose either 'Rock', 'Paper' or 'Scissors'.";
+    console.log("That selection is invalid. Please input 'Rock', 'Paper' or 'Scissors'.");
+    return false;
 }
 
 function playRockPaperScissors(bestOf = 5){
@@ -32,24 +33,36 @@ function playRockPaperScissors(bestOf = 5){
     let gamesRemaining = bestOf;
     while(gamesRemaining > 0){
         let userInput = prompt(`Game ${bestOf - gamesRemaining + 1} of ${bestOf}\nPlease input Rock, Paper or Scissors.`, "");
+        if(userInput === null){ console.log("The game was cancelled."); return; }
         userInput = userInput.toLowerCase()
         let computerChoice = getComputerChoice();
         
-        if(userInput === computerChoice){ console.log(`It's a draw! You both selected ${userInput}!`); }
+        if(userInput === computerChoice){
+            alert(`It's a draw! You both selected ${userInput}!`);
+            gamesRemaining--;
+            continue;
+        }
         if(
             (userInput === 'rock' && computerChoice === 'scissors') ||
             (userInput === 'paper' && computerChoice === 'rock') ||
             (userInput === 'scissors' && computerChoice === 'paper')
-        ){ console.log(`You won! Your ${userInput} beat the computer's ${computerChoice}!`); }
+        ){
+            alert(`You won! Your ${userInput} beat the computer's ${computerChoice}!`);
+            score++;
+            gamesRemaining--;
+            continue;
+        }
         if(
             (userInput === 'rock' && computerChoice === 'paper') ||
             (userInput === 'paper' && computerChoice === 'scissors') ||
             (userInput === 'scissors' && computerChoice === 'rock')
-        ){ console.log(`You lost... Your ${userInput} was beaten by the computer's ${computerChoice}.`); }
+        ){
+            alert(`You lost... Your ${userInput} was beaten by the computer's ${computerChoice}.`);
+            gamesRemaining--;
+            continue;
+        }
         
-        console.log("That selection is invalid. Please choose either 'Rock', 'Paper' or 'Scissors'.");
-
-        gamesRemaining--;
+        alert("That selection is invalid. Please input 'Rock', 'Paper' or 'Scissors'.");
     }
     alert(`The game is over. You scored ${score} out of ${bestOf}!`);
 }
