@@ -7,7 +7,7 @@ function getComputerChoice() {
     }
 }
 
-function playRockPaperScissors(userInput = "") {
+function rockPaperScissorsRound(userInput = "") {
     let computerChoice = getComputerChoice();
     if(typeof userInput !== "string"){ return "That input is not a string. Please choose either 'Rock', 'Paper' or 'Scissors'."; }
     userInput = userInput.toLowerCase()
@@ -25,4 +25,17 @@ function playRockPaperScissors(userInput = "") {
     ){ return `You lost... Your ${userInput} was beaten by the computer's ${computerChoice}.`; }
     
     return "That selection is invalid. Please choose either 'Rock', 'Paper' or 'Scissors'.";
+}
+
+function playRockPaperScissors(bestOf = 5){
+    let score = 0;
+    let gamesRemaining = bestOf;
+    while(gamesRemaining > 0){
+        let userInput = prompt("Please input Rock, Paper or Scissors.", "");
+        userInput = userInput.toLowerCase()
+
+
+        gamesRemaining--;
+    }
+    alert(`The game is over. You scored ${score} out of ${bestOf}!`);
 }
