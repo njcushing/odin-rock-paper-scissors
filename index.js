@@ -7,6 +7,17 @@ function getComputerChoice() {
     }
 }
 
+var buttons = document.querySelectorAll('.game-button');
+buttons.forEach(button => button.addEventListener('click', buttonClicked));
+
+function buttonClicked(e) {
+  console.log(e.target.textContent);
+}
+
+
+
+/* 
+
 function rockPaperScissorsRound(userInput = "") {
     let computerChoice = getComputerChoice();
     if(typeof userInput !== "string"){ console.log("That input is not a string. Please input 'Rock', 'Paper' or 'Scissors'."); return false; }
@@ -66,3 +77,5 @@ function playRockPaperScissors(bestOf = 5){
     }
     alert(`The game is over. You scored ${score} out of ${bestOf}!`);
 }
+
+*/
